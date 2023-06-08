@@ -230,6 +230,27 @@ VectorX Robot::get_qdot() {
     return qdot;
 }
 
+VectorX Robot::get_ori() {
+    VectorX ori = VectorX::Zero(_ndof_u * 12);
+    for (auto actuator : _actuators) {
+        for (int i = 0;i < actuator->_ndof;i++) {
+            SE3 actuator_ori = actuator->_joint->_E_j0_0;
+            int start_idx = 12 * actuator->_index[i];
+            Matrix3X R = actuator_ori.topLeftCorner(3, 3);
+            Matrix3X pos = actuator_ori.topRightCorner(3, 1);
+            for (int row = 0; row < 3; row++) {
+                ori.segment(start_idx + 3 * row, 3) += R.row(row);
+            }
+            ori.segment(start_idx + 9, 3) += pos.col(0);
+            // cout << actuator->_index[i] << " R mat:" << actuator_ori.topLeftCorner(3, 3) << endl;
+            // cout << "R flat:" << ori.segment(start_idx, 9) << endl;
+            // cout << actuator->_index[i] << " pos:" << pos << endl;
+            // cout << endl;
+        }
+    }
+    return ori;
+}
+
 VectorX Robot::get_phi() {
     VectorX phi = VectorX::Zero(_ndof_m);
     for (auto body : _bodies) {

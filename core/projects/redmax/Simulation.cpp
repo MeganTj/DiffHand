@@ -114,6 +114,10 @@ const VectorX Simulation::get_qdot() {
     return _robot->get_qdot();
 }
 
+const VectorX Simulation::get_ori() {
+    return _robot->get_ori();
+}
+
 void Simulation::reparam() {
     _robot->reparam();
 }

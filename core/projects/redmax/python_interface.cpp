@@ -119,6 +119,8 @@ PYBIND11_MODULE(redmax_py, m) {
                 "get q")
         .def("get_qdot", &Simulation::get_qdot,
                 "get qdot")
+        .def("get_ori", &Simulation::get_ori,
+                "get actuator orientation")
         .def("get_variables", &Simulation::get_variables,
                 "get variables")
         .def("get_design_params", &Simulation::get_design_params,

@@ -245,6 +245,7 @@ public:
     void set_qdot(const VectorX qdot);
     const VectorX get_q();
     const VectorX get_qdot();
+    const VectorX get_ori();
     void reparam();
 
     // variables

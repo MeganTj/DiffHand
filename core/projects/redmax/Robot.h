@@ -70,6 +70,7 @@ public:
     VectorX get_q();
     VectorX get_qdot();
     VectorX get_phi();
+    VectorX get_ori();
     VectorX get_variables();
 
     // reparameterization
